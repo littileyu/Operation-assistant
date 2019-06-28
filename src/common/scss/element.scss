@@ -1,0 +1,79 @@
+@import "./variable";
+
+// badge
+.el-badge__content {
+  display: flex;
+  align-items: center;
+}
+
+// menu
+.el-menu {
+  background-color: #fff;
+}
+.el-submenu .el-menu {
+  background-color: #fff;
+}
+.el-menu-item:hover {
+  background-color: #fff;
+}
+.el-submenu .el-menu-item:hover, .el-submenu__title:hover {
+  color: rgb(58,177,254);
+  background-color: #fff;
+}
+.el-menu--horizontal.el-menu--dark .el-submenu .el-menu-item.is-active, .el-menu-item.is-active {
+  color: inherit;
+}
+.el-menu-item, .el-submenu__title {
+  height: 50px;
+  line-height: 50px;
+}
+
+// dialog
+.el-dialog--small {
+  width: 70%;
+}
+.el-dialog__body {
+  padding: 0;
+}
+
+// progress
+.el-progress-bar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+// button
+.el-button--primary {
+  background: $color-btn;
+  border-color: $color-btn;
+
+  &:hover,
+  &:focus {
+    background: lighten($color-btn, 10%);
+    border-color: lighten($color-btn, 10%);
+  }
+
+  &.is-active,
+  &:active {
+    background: darken($color-btn, 6%);
+    border-color: darken($color-btn, 6%);
+  }
+}
+
+.el-button--info {
+  background: $color-btn-sub;
+  border-color: $color-btn-sub;
+
+  &:hover,
+  &:focus {
+    background: lighten($color-btn-sub, 4%);
+    border-color: lighten($color-btn-sub, 4%);
+  }
+
+  &.is-active,
+  &:active {
+    background: darken($color-btn-sub, 6%);
+    border-color: darken($color-btn-sub, 6%);
+  }
+}
