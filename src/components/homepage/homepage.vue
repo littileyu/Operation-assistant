@@ -197,15 +197,20 @@
 </template>
 
 <script>
-import OCircle from 'base/o-circle/o-circle'
-import Chart from 'vue-echarts-v3/src/full'
-import ChartTitle from 'base/chart-title/chart-title'
-import ChartContainer from 'base/chart-container/chart-container'
-import {addToTopMixin} from 'common/js/mixin'
-import {formatDate} from 'common/js/date'
-import {barChartColor, lineChartColor} from 'common/js/chartColor'
-import {getTarget, getBaseData, getMonthChartOption, getPChartOptions} from 'api/homepage'
-import {ERR_OK} from 'api/config'
+import OCircle from "base/o-circle/o-circle";
+import Chart from "vue-echarts-v3/src/full";
+import ChartTitle from "base/chart-title/chart-title";
+import ChartContainer from "base/chart-container/chart-container";
+import { addToTopMixin } from "common/js/mixin";
+import { formatDate } from "common/js/date";
+import { barChartColor, lineChartColor } from "common/js/chartColor";
+import {
+  getTarget,
+  getBaseData,
+  getMonthChartOption,
+  getPChartOptions
+} from "api/homepage";
+import { ERR_OK } from "api/config";
 
 export default {
   mixins: [addToTopMixin],
@@ -226,16 +231,16 @@ export default {
           loading: true,
           ready: {
             tooltip: {
-              trigger: 'axis',
+              trigger: "axis",
               axisPointer: {
-                type: 'cross',
+                type: "cross",
                 crossStyle: {
-                  color: '#999'
+                  color: "#999"
                 }
               }
             },
             legend: {
-              data: ['本期销售', '月累计销售']
+              data: ["本期销售", "月累计销售"]
             }
           },
           option: {
@@ -246,11 +251,11 @@ export default {
       dialog: {
         lineReady: {
           tooltip: {
-            trigger: 'axis',
+            trigger: "axis",
             axisPointer: {
-              type: 'cross',
+              type: "cross",
               crossStyle: {
-                color: '#999'
+                color: "#999"
               }
             }
           }
@@ -280,74 +285,103 @@ export default {
           }
         }
       }
-    }
+    };
   },
   computed: {
     upMemberCount() {
-      let count = this.baseData.upMemberCount
+      let count = this.baseData.upMemberCount;
       if (count > 0) {
-        return `上升：${count}`
+        return `上升：${count}`;
       } else if (count < 0) {
-        return `下降：${-count}`
+        return `下降：${-count}`;
       } else {
-        return '持平'
+        return "持平";
       }
     }
   },
   methods: {
     fetchData() {
-      this._getBaseData()
-      this._getTarget()
-      this.remainTime()
-      this._getMonthChartOption()
-      this._getPChartOptions()
+      this._getBaseData();
+      this._getTarget();
+      this.remainTime();
+      this._getMonthChartOption();
+      this._getPChartOptions();
     },
     showDialog(item) {
-      this.dialog[item].visible = true
+      this.dialog[item].visible = true;
     },
     remainTime() {
-      let time = new Date()
-      let h = 23 - time.getHours()
-      let m = 59 - time.getMinutes()
-      return `${h}小时${m}分钟`
+      let time = new Date();
+      let h = 23 - time.getHours();
+      let m = 59 - time.getMinutes();
+      return `${h}小时${m}分钟`;
     },
     trendCls(oldData, newData) {
-      return newData > oldData ? 'is-rise' : newData < oldData ? 'is-fall' : 'is-equal'
+      return newData > oldData
+        ? "is-rise"
+        : newData < oldData ? "is-fall" : "is-equal";
     },
     iconTrend(oldData, newData) {
-      return newData > oldData ? 'icon-shangsheng' : newData < oldData ? 'icon-xiajiang' : 'icon-chiping'
+      return newData > oldData
+        ? "icon-shangsheng"
+        : newData < oldData ? "icon-xiajiang" : "icon-chiping";
     },
     _getBaseData() {
-      getBaseData().then((res) => {
+      getBaseData().then(res => {
         if (res.code === ERR_OK) {
-          this.baseData = res.data
+          this.baseData = res.data;
         }
-      })
+      });
     },
     _getTarget() {
-      getTarget().then((res) => {
+      getTarget().then(res => {
         if (res.code === ERR_OK) {
-          this.target = res.target
+          this.target = res.target;
         }
-      })
+      });
     },
     _getMonthChartOption() {
-      getMonthChartOption().then((res) => {
+      getMonthChartOption().then(res => {
         if (res.code === ERR_OK) {
-          this.chart.month.option = Object.assign({}, this.chart.barColor, this.chart.month.ready, res.option)
-          this.chart.month.loading = false
+          this.chart.month.option = Object.assign(
+            {},
+            this.chart.barColor,
+            this.chart.month.ready,
+            res.option
+          );
+          this.chart.month.loading = false;
         }
-      })
+      });
     },
     _getPChartOptions() {
-      getPChartOptions().then((res) => {
+      getPChartOptions().then(res => {
         if (res.code === ERR_OK) {
-          this.dialog.discount.option = Object.assign({}, this.chart.lineColor, this.dialog.lineReady, res.options[0])
-          this.dialog.return.option = Object.assign({}, this.chart.lineColor, this.dialog.lineReady, res.options[1])
-          this.dialog.lack.option = Object.assign({}, this.chart.lineColor, this.dialog.lineReady, res.options[2])
-          this.dialog.unsalable.option = Object.assign({}, this.chart.lineColor, this.dialog.lineReady, res.options[3])
+          this.dialog.discount.option = Object.assign(
+            {},
+            this.chart.lineColor,
+            this.dialog.lineReady,
+            res.options[0]
+          );
+          this.dialog.return.option = Object.assign(
+            {},
+            this.chart.lineColor,
+            this.dialog.lineReady,
+            res.options[1]
+          );
+          this.dialog.lack.option = Object.assign(
+            {},
+            this.chart.lineColor,
+            this.dialog.lineReady,
+            res.options[2]
+          );
+          this.dialog.unsalable.option = Object.assign(
+            {},
+            this.chart.lineColor,
+            this.dialog.lineReady,
+            res.options[3]
+          );
         }
-      })
+      });
     }
   },
   components: {
@@ -357,17 +391,17 @@ export default {
     ChartContainer
   },
   created() {
-    this.today = formatDate('yyyy-MM-dd')
-    this.fetchData()
+    this.today = formatDate("yyyy-MM-dd");
+    // this.fetchData()
   },
   mounted() {
-    clearInterval(timer)
+    clearInterval(timer);
     let timer = setInterval(() => {
-      this._getTarget()
-      this.remainTime()
-    }, 1000 * 60)
+      this._getTarget();
+      this.remainTime();
+    }, 1000 * 60);
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

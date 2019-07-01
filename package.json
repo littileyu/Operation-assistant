@@ -1,6 +1,6 @@
 {
   "name": "aouhelper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "aou helper",
   "author": "",
   "private": true,
@@ -12,10 +12,11 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "echarts": "^4.2.1",
     "element-ui": "^1.4.3",
     "qs": "^6.5.1",
     "vue": "^2.4.2",
-    "vue-echarts-v3": "^1.0.5",
+    "vue-echarts-v3": "^1.0.19",
     "vue-router": "^2.7.0",
     "vuex": "^2.4.0"
   },

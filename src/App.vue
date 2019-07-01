@@ -24,24 +24,22 @@
 </template>
 
 <script>
-import OHeader from 'components/o-header/o-header'
-import NavMenu from 'components/nav-menu/nav-menu'
-import OTabs from 'components/o-tabs/o-tabs'
-import {mapGetters} from 'vuex'
+import OHeader from "components/o-header/o-header";
+import NavMenu from "components/nav-menu/nav-menu";
+import OTabs from "components/o-tabs/o-tabs";
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'app',
+  name: "app",
   computed: {
-    ...mapGetters([
-      'currentTab'
-    ])
+    ...mapGetters(["currentTab"])
   },
   methods: {
     reload(tab) {
       if (tab.fullPath !== this.currentTab.fullPath) {
-        return
+        return;
       }
-      this.$refs.rootView.fetchData()
+      // this.$refs.rootView.fetchData()
     }
   },
   components: {
@@ -49,7 +47,7 @@ export default {
     OHeader,
     OTabs
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
